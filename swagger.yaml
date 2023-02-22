@@ -14,7 +14,23 @@ paths:
       summary: Greet a User from service
       operationId: hello
       x-google-backend:
-        address: http://35.195.145.73.nip.io/api/v1/service
+        address: http://35.195.145.73.nip.io:3000/api/v1/service
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+  /api/v1/$PROTOCOLE/$ROUTE:
+    post:
+      summary: Post a route
+      operationId: routing
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      x-google-backend:
+        address: http://35.195.145.73.nip.io:3000/api/v1/service
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         '200':
           description: A successful response
