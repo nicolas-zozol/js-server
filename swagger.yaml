@@ -1,7 +1,7 @@
 # api_gateway_config.yaml
 swagger: '2.0'
 info:
-  title: quote
+  title: main
   description: API test for backend
   version: 1.0.0
 schemes:
@@ -9,28 +9,6 @@ schemes:
 produces:
   - application/json
 paths:
-  /api/v1/nip:
-    get:
-      summary: Greet a User from service
-      operationId: hellonip
-      x-google-backend:
-        address: http://35.187.188.139.nip.io:3000/api/v1/service
-      responses:
-        '200':
-          description: A successful response
-          schema:
-            type: string
-  /api/v1/service:
-    get:
-      summary: Greet a User from service
-      operationId: hello
-      x-google-backend:
-        address: http://gw.nik.public.zone:3000/api/v1/service
-      responses:
-        '200':
-          description: A successful response
-          schema:
-            type: string
   /api/v1/{protocol}/{quote}:
     post:
       summary: Post a route
@@ -39,24 +17,13 @@ paths:
         - application/json
       produces:
         - application/json
+      parameters: [
+        {name: protocol, in: path, description: protocol, required: true, type: string},
+        {name: quote, in: path, description: quotes, required: true, type: string}
+      ]
       x-google-backend:
-        address: http://swaap.internal.zone:3000/api/v1/quote
-        path_translation: APPEND_PATH_TO_ADDRESS
-      responses:
-        '200':
-          description: A successful response
-          schema:
-            type: string
-  /api/v1/polygon/eth-btc:
-    post:
-      summary: Post a route
-      operationId: direct
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      x-google-backend:
-        address: http://swaap.internal.zone:3000/api/v1/polygon/eth-btc
+        address: http://main.gw-zone.swaap.internal:8000/api/v1/quote
+        path_translation: CONSTANT_ADDRESS
       responses:
         '200':
           description: A successful response
