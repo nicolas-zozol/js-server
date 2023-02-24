@@ -8,9 +8,18 @@ app.get('/api/v1/service', (req, res) => {
     res.send('Running service is perfectly working!')
 })
 
-app.post('/api/v1/quote', (req, res) => {
+app.post('/', (req, res) => {
     const url = req.url
-    console.log('/quote: getting url', url)
+    console.log('/root: getting url', url)
+
+    console.log('sending back nothing')
+    res.send("Fail, calling directly to the root")
+})
+
+
+app.post('/api/v1/', (req, res) => {
+    const url = req.url
+    console.log('/api/v1: getting url', url)
     const protocol = req.query.protocol
     const route = req.query.route
     const content = req.body
